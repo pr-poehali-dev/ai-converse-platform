@@ -7,9 +7,9 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 
 interface SettingsDialogProps {
   open: boolean;
@@ -27,11 +27,6 @@ const SettingsDialog = ({ open, onOpenChange }: SettingsDialogProps) => {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <div className="flex items-center justify-between">
-            <Label htmlFor="dark-mode">Темная тема</Label>
-            <Switch id="dark-mode" />
-          </div>
-          
           <div className="space-y-2">
             <Label>Модель ИИ</Label>
             <Select defaultValue="gpt-4">
@@ -60,6 +55,16 @@ const SettingsDialog = ({ open, onOpenChange }: SettingsDialogProps) => {
               <span className="text-sm text-muted-foreground">Средняя</span>
             </div>
             <Slider id="length" defaultValue={[50]} max={100} step={1} />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <Label htmlFor="save-history">Сохранять историю чатов</Label>
+            <Switch id="save-history" defaultChecked />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <Label htmlFor="web-search">Поиск в интернете для сложных вопросов</Label>
+            <Switch id="web-search" defaultChecked />
           </div>
         </div>
         <div className="flex justify-end">

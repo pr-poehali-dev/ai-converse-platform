@@ -12,14 +12,23 @@ import { useState } from "react";
 import SettingsDialog from "./SettingsDialog";
 import HelpDialog from "./HelpDialog";
 
-const Sidebar = () => {
+interface SidebarProps {
+  onNewChat: () => void;
+  onSelectMode: (mode: string) => void;
+}
+
+const Sidebar = ({ onNewChat, onSelectMode }: SidebarProps) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
 
   return (
     <div className="w-64 border-r h-[calc(100vh-4rem)] p-4 hidden md:block flex flex-col">
-      <div className="space-y-2">
-        <Button className="w-full justify-start" variant="default">
+      <div className="flex flex-col flex-1">
+        <Button 
+          className="w-full justify-start" 
+          variant="default"
+          onClick={onNewChat}
+        >
           <PlusCircle className="mr-2 h-4 w-4" />
           Новый чат
         </Button>
@@ -27,23 +36,35 @@ const Sidebar = () => {
         <h3 className="text-sm font-medium my-2">Возможности</h3>
         <Separator className="my-2" />
         
-        <Button className="w-full justify-start" variant="ghost">
+        <Button 
+          className="w-full justify-start" 
+          variant="ghost"
+          onClick={() => onSelectMode("text")}
+        >
           <MessageSquare className="mr-2 h-4 w-4" />
           Текстовые запросы
         </Button>
         
-        <Button className="w-full justify-start" variant="ghost">
+        <Button 
+          className="w-full justify-start" 
+          variant="ghost"
+          onClick={() => onSelectMode("image")}
+        >
           <ImageIcon className="mr-2 h-4 w-4" />
           Генерация изображений
         </Button>
         
-        <Button className="w-full justify-start" variant="ghost">
+        <Button 
+          className="w-full justify-start" 
+          variant="ghost"
+          onClick={() => onSelectMode("document")}
+        >
           <FileText className="mr-2 h-4 w-4" />
           Анализ документов
         </Button>
       </div>
       
-      <div className="mt-auto space-y-2 w-full">
+      <div className="mt-auto space-y-2">
         <Separator className="my-2" />
         <Button 
           className="w-full justify-start" 
