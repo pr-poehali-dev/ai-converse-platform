@@ -3,15 +3,21 @@ import { Separator } from "@/components/ui/separator";
 import { 
   PlusCircle, 
   MessageSquare, 
-  Image, 
+  Image as ImageIcon, 
   FileText, 
   Settings, 
   HelpCircle 
 } from "lucide-react";
+import { useState } from "react";
+import SettingsDialog from "./SettingsDialog";
+import HelpDialog from "./HelpDialog";
 
 const Sidebar = () => {
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+
   return (
-    <div className="w-64 border-r h-[calc(100vh-4rem)] p-4 hidden md:block">
+    <div className="w-64 border-r h-[calc(100vh-4rem)] p-4 hidden md:block flex flex-col">
       <div className="space-y-2">
         <Button className="w-full justify-start" variant="default">
           <PlusCircle className="mr-2 h-4 w-4" />
@@ -27,7 +33,7 @@ const Sidebar = () => {
         </Button>
         
         <Button className="w-full justify-start" variant="ghost">
-          <Image className="mr-2 h-4 w-4" />
+          <ImageIcon className="mr-2 h-4 w-4" />
           Генерация изображений
         </Button>
         
@@ -37,18 +43,29 @@ const Sidebar = () => {
         </Button>
       </div>
       
-      <div className="absolute bottom-4 space-y-2 w-[calc(100%-2rem)]">
+      <div className="mt-auto space-y-2 w-full">
         <Separator className="my-2" />
-        <Button className="w-full justify-start" variant="ghost">
+        <Button 
+          className="w-full justify-start" 
+          variant="ghost"
+          onClick={() => setSettingsOpen(true)}
+        >
           <Settings className="mr-2 h-4 w-4" />
           Настройки
         </Button>
         
-        <Button className="w-full justify-start" variant="ghost">
+        <Button 
+          className="w-full justify-start" 
+          variant="ghost"
+          onClick={() => setHelpOpen(true)}
+        >
           <HelpCircle className="mr-2 h-4 w-4" />
           Помощь
         </Button>
       </div>
+
+      <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
+      <HelpDialog open={helpOpen} onOpenChange={setHelpOpen} />
     </div>
   );
 };
