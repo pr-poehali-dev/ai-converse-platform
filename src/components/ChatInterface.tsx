@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Mic, Bot, Image as ImageIcon, Upload, Search } from "lucide-react";
+import { Send, Mic, Bot, Image as ImageIcon, Upload, Search, MessageSquare, FileText } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
@@ -633,7 +633,6 @@ const ChatInterface = ({ activeMode = "text", onNewChat }: ChatInterfaceProps) =
             <Button 
               size="icon" 
               onClick={handleVoiceCommand}
-
               className="flex-shrink-0"
             >
               <Mic className="h-4 w-4" />
